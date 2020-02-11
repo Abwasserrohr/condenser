@@ -340,7 +340,8 @@ export function* markNotificationsAsReadSaga(action) {
 export function* getPostNotificationsSaga(action) {
     if (!action.payload)
         throw 'Cannot get post notifications, please specify an author and permlink';
-    const { author, permlink } = action.payload;
+    const { author, permlink, last_id } = action.payload;
+    console.log('LAST ID IS:', last_id);
     yield put(
         globalActions.postNotificationsLoading({
             author,
@@ -368,6 +369,7 @@ export function* getPostNotificationsSaga(action) {
                     author,
                     permlink,
                     postNotifications,
+                    last_id,
                 })
             );
         }
